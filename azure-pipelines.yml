@@ -1,4 +1,4 @@
-variables:
+env:
   LD_LIBRARY_PATH: /usr/local/lib:/usr/local/include
   DYLD_FALLBACK_LIBRARY_PATH: /usr/local/include
   BOOST_PATH: Libraries/boost_1_67_0
