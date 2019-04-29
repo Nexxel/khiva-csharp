@@ -1,9 +1,3 @@
-steps:
-- task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 4.7.2'
-  inputs:
-    versionSpec: 4.7.2
-    
 jobs:
 - job: Linux
   pool:
@@ -11,6 +5,10 @@ jobs:
   steps:
   - checkout: self
     clean: true
+  - task: NuGetToolInstaller@0
+    displayName: 'Use NuGet 4.7.2'
+    inputs:
+      versionSpec: 4.7.2
   - script: |
       export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/include:$LD_LIBRARY_PATH
       export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/include:$DYLD_FALLBACK_LIBRARY_PATH
