@@ -15,6 +15,7 @@ jobs:
       export CPPFLAGS=-I/usr/local/opt/openssl/include
       export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
       export PATH=/usr/local/opt/openssl/bin:/usr/bin/:/bin/:/usr/local/bin:/usr/local/lib:/usr/local/share:/usr/local/include:/usr/lib:$AF_PATH/lib:$KHIVA_PATH/lib:$PATH
+      echo $PATH
     displayName: "Exporting env variables"
   - script: echo $PATH
 - job: macOS
