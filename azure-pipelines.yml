@@ -3,17 +3,15 @@ jobs:
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
-  - script: |
-    export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/include:$LD_LIBRARY_PATH
-    export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/include:$DYLD_FALLBACK_LIBRARY_PATH
-    export BOOST_PATH=Libraries/boost_1_67_0:$BOOST_PATH
-    export AF_PATH=/opt/arrayfire-3:$AF_PATH
-    export KHIVA_PATH=./khiva-library:$KHIVA_PATH
-    export LDFLAGS=-L/usr/local/opt/openssl/lib
-    export CPPFLAGS=-I/usr/local/opt/openssl/include
-    export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
-    export PATH=/usr/local/opt/openssl/bin:/usr/bin/:/bin/:/usr/local/bin:/usr/local/lib:/usr/local/share:/usr/local/include:/usr/lib:$AF_PATH/lib:$KHIVA_PATH/lib:$PATH
-  displayname: "Export"
+  - script: export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/include:$LD_LIBRARY_PATH
+  - script: export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/include:$DYLD_FALLBACK_LIBRARY_PATH
+  - script: export BOOST_PATH=Libraries/boost_1_67_0:$BOOST_PATH
+  - script: export AF_PATH=/opt/arrayfire-3:$AF_PATH
+  - script: export KHIVA_PATH=./khiva-library:$KHIVA_PATH
+  - script: export LDFLAGS=-L/usr/local/opt/openssl/lib
+  - script: export CPPFLAGS=-I/usr/local/opt/openssl/include
+  - script: export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+  - script: export PATH=/usr/local/opt/openssl/bin:/usr/bin/:/bin/:/usr/local/bin:/usr/local/lib:/usr/local/share:/usr/local/include:/usr/lib:$AF_PATH/lib:$KHIVA_PATH/lib:$PATH
   - script: echo $PATH
 - job: macOS
   pool:
