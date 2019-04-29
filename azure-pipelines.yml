@@ -3,6 +3,7 @@ steps:
   displayName: 'Use NuGet 4.7.2'
   inputs:
     versionSpec: 4.7.2
+    
 jobs:
 - job: Linux
   pool:
