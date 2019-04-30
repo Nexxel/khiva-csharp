@@ -29,6 +29,7 @@ jobs:
           solution: 'Khiva.sln'
           verbosityRestore: 'Quiet'
       - script: |
+          pip install pip=19.1
           pip install conan
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
