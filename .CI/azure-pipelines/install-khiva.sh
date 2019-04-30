@@ -36,7 +36,7 @@ else
 
      #Installing conan and dependencies
      if [[ "$AGENT_OS" == "Linux" ]]; then
-        sudo pip install conan -I
+        pip install conan -I
      else
         sudo pip${PYTHON_VERSION} install conan -I
      fi
