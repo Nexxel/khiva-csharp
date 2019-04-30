@@ -15,8 +15,6 @@ if [[ "$AGENT_OS" == "Darwin" ]]; then
     # Installs arrayfire
     sudo installer -pkg ./installers/arrayfire-no-gl.pkg -target /
     echo 'export PATH=$PATH' >> ~/.bash_profile
-    echo "PATH:"
-    echo $PATH
 else
     sudo apt-get update && \
     sudo apt-get install -y libboost-all-dev \
@@ -28,6 +26,8 @@ else
     libopenblas-dev
 
     if [ ! -e "./installers/arrayfire-no-gl.sh" ]; then
+        mkdir installers
+        touch installers/arrayfire-no-gl.sh
         wget https://github.com/shapelets/arrayfire/releases/download/v3.6.2/arrayfire-no-gl.sh -O installers/arrayfire-no-gl.sh
     fi
 
