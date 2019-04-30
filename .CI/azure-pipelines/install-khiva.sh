@@ -48,7 +48,7 @@ else
     cd khiva-library
     mkdir -p build && cd build
     if [[ "$AGENT_OS" == "Darwin" ]]; then
-        conan install .. -s compiler=apple-clang -s compiler.version=9.1 -s compiler.libcxx=libc++ --build missing
+        conan install .. -s compiler=apple-clang -s compiler.version=10.0 -s compiler.libcxx=libc++ --build missing
         cmake .. -DKHIVA_ONLY_CPU_BACKEND=ON -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_EXAMPLES=OFF -DKHIVA_BUILD_BENCHMARKS=OFF
         sudo make install -j8
     else
