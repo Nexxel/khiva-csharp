@@ -22,7 +22,16 @@ jobs:
     displayName: 'Use NuGet 4.7.2'
     inputs:
       versionSpec: 4.7.2
-  - script: echo $PATH
+  - script: | 
+      source .CI/travis/install_mono.sh
+      source .CI/travis/install-arrayfire.sh
+      source .CI/travis/install-khiva.sh
+    displayName: "Install"
+  - script: source .CI/travis/build_and_test_mono.sh
+    displayName: "Build and test"
+  - script: bash <(curl -s https://codecov.io/bash)
+    displayName: "Codecov"
+    
 - job: macOS
   pool:
     vmImage: 'macOS-10.14'
