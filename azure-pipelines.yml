@@ -100,9 +100,11 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: 4.7.2
-      - task: NuGetCommand@2
-        displayName: "Nuget restore Khiva.sln"
+      - task: VSBuild@1
         inputs:
-          command: 'restore'
           solution: 'Khiva.sln'
-          verbosityRestore: 'Quiet'
+          platform: 'x64'
+          configuration: 'Debug'
+          maximumCpuCount: true
+          restoreNugetPackages: true
+          msbuildArchitecture: 'x64'
