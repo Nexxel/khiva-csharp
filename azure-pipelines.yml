@@ -41,7 +41,27 @@ jobs:
   pool:
     vmImage: 'macOS-10.14'
   steps:
-  - script: echo hello from macOS
+  - checkout: self
+    clean: true
+  - task: NuGetToolInstaller@0
+    displayName: 'Use NuGet 4.7.2'
+    inputs:
+      versionSpec: 4.7.2
+  - task: NuGetCommand@2
+    displayName: "Nuget restore Khiva.sln"
+    inputs:
+      command: 'restore'
+      solution: 'Khiva.sln'
+      verbosityRestore: 'Quiet'
+  - script: | 
+      source .CI/travis/install-arrayfire.sh
+      source .CI/travis/install-khiva.sh
+    displayName: "Install"
+  - script: source .CI/travis/build_and_test_mono.sh
+    displayName: "Build and test"
+  - script: bash <(curl -s https://codecov.io/bash)
+    displayName: "Codecov"
+    
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
