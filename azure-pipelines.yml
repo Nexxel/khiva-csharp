@@ -29,7 +29,7 @@ jobs:
           solution: 'Khiva.sln'
           verbosityRestore: 'Quiet'
       - script: |
-          pip install --upgrade pip
+          pip install conan
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
         displayName: "Install"
@@ -56,12 +56,14 @@ jobs:
           solution: 'Khiva.sln'
           verbosityRestore: 'Quiet'
       - script: |
+          pip install --upgrade pip
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
         displayName: "Install"
       - script: source .CI/azure-pipelines/build_and_test_mono.sh
         displayName: "Build and test"
       - script: bash <(curl -s https://codecov.io/bash)
+        condition: succeeded()
         displayName: "Codecov"
 
   - job: Windows
