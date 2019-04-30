@@ -26,7 +26,7 @@ else
     # Install cmake in Linux, it is already installed in osx
     if [[ "$AGENT_OS" == "Linux" ]]; then
         # Check if the file already exists
-        if [ ! -e "${BUILD_SOURCESDIRECTORY	}/cmakebin/cmake-3.13.2-Linux-x86_64.sh" ]; then
+        if [ ! -e "${BUILD_SOURCESDIRECTORY}/cmakebin/cmake-3.13.2-Linux-x86_64.sh" ]; then
             mkdir -p cmakebin
             wget https://github.com/Kitware/CMake/releases/download/v3.13.2/cmake-3.13.2-Linux-x86_64.sh -O cmakebin/cmake-3.13.2-Linux-x86_64.sh
         fi
@@ -47,7 +47,7 @@ else
     git clone https://github.com/shapelets/khiva.git khiva-library
     cd khiva-library
     mkdir -p build && cd build
-    if [[ "$AGENT_OS" == "AGENT_OS" ]]; then
+    if [[ "$AGENT_OS" == "Darwin" ]]; then
         conan install .. -s compiler=apple-clang -s compiler.version=9.1 -s compiler.libcxx=libc++ --build missing
         cmake .. -DKHIVA_ONLY_CPU_BACKEND=ON -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_EXAMPLES=OFF -DKHIVA_BUILD_BENCHMARKS=OFF
         sudo make install -j8
