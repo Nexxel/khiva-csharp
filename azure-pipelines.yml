@@ -22,8 +22,13 @@ jobs:
     displayName: 'Use NuGet 4.7.2'
     inputs:
       versionSpec: 4.7.2
+  - task: NuGetCommand@2
+    displayName: "Nuget restore Khiva.sln"
+    inputs:
+      command: 'restore'
+      solution: 'Khiva.sln'
+      verbosityRestore: 'Quiet'
   - script: | 
-      source .CI/travis/install_mono.sh
       source .CI/travis/install-arrayfire.sh
       source .CI/travis/install-khiva.sh
     displayName: "Install"
