@@ -29,6 +29,7 @@ jobs:
       solution: 'Khiva.sln'
       verbosityRestore: 'Quiet'
   - script: | 
+      pip install --upgrade pip
       source .CI/travis/install-arrayfire.sh
       source .CI/travis/install-khiva.sh
     displayName: "Install"
