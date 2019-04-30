@@ -8,7 +8,8 @@
 if [[ "$AGENT_OS" == "Darwin" ]]; then
     brew install fftw freeimage
     if [ ! -e "./installers/arrayfire-no-gl.pkg" ]; then
-        echo "No existe"
+        mkdir installers
+        touch installers/arrayfire-no-gl.pkg
         wget https://github.com/shapelets/arrayfire/releases/download/v3.6.2/arrayfire-no-gl.pkg -O installers/arrayfire-no-gl.pkg
     fi
     echo "Existe"
