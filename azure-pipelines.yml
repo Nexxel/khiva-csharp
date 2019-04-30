@@ -62,3 +62,43 @@ jobs:
   - job: Windows
     pool:
       vmImage: 'vs2017-win2016'
+    steps:
+      - checkout: self
+        clean: true
+      - task: DownloadFile@1
+        inputs:
+          FileUrl: 'https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1'
+      - powershell: 7z x ArrayFire-v3.6.2.zip -o"C:\Program Files"
+      - script: reg add HKCU\Software\Kitware\CMake\Packages\ArrayFire /v ArrayFire_CMake_DIR /d "C:\Program Files\ArrayFire\v3\cmake" /f
+      - script: vcpkg install --triplet x64-windows gtest eigen3
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: 'if ($env:INSTALL_KHIVA_METHOD -eq "installer"){
+            if(!(Test-Path -Path "C:\Program Files\Khiva" )){ appveyor DownloadFile "https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-unattended.exe" -FileName khiva-v0.2.2-unattended.exe };
+            if(!(Test-Path -Path "C:\Program Files\Khiva" )){ .\khiva-v0.2.2-unattended.exe /S };
+          }else{
+            git clone -q https://github.com/shapelets/khiva.git C:\khiva-library ;
+            cd C:\khiva-library;
+            mkdir build;
+            cd build;
+            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DBOOST_ROOT="$($env:BOOST_PATH)" -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
+            cmake --build . --config Debug --target INSTALL -- /m;
+          }'
+      - script: |
+          cd c:\projects\khiva-csharp
+          choco install Codecov
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.7'
+          architecture: 'x64'
+      - task: NuGetToolInstaller@0
+        displayName: 'Use NuGet 4.7.2'
+        inputs:
+          versionSpec: 4.7.2
+      - task: NuGetCommand@2
+        displayName: "Nuget restore Khiva.sln"
+        inputs:
+          command: 'restore'
+          solution: 'Khiva.sln'
+          verbosityRestore: 'Quiet'
