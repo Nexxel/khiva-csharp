@@ -21,7 +21,6 @@ jobs:
           verbosityRestore: 'Quiet'
       - script: |
           source .CI/azure-pipelines/install-arrayfire.sh
-          source .CI/azure-pipelines/install-khiva.sh
         displayName: "Install"
       - script: source .CI/azure-pipelines/build_and_test_mono.sh
         displayName: "Build and test"
