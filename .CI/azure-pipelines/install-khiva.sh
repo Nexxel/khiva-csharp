@@ -26,7 +26,7 @@ else
     # Install cmake in Linux, it is already installed in osx
     if [[ "$AGENT_OS" == "Linux" ]]; then
         # Check if the file already exists
-        if [ ! -e "${TRAVIS_BUILD_DIR}/cmakebin/cmake-3.13.2-Linux-x86_64.sh" ]; then
+        if [ ! -e "${BUILD_SOURCESDIRECTORY	}/cmakebin/cmake-3.13.2-Linux-x86_64.sh" ]; then
             mkdir -p cmakebin
             wget https://github.com/Kitware/CMake/releases/download/v3.13.2/cmake-3.13.2-Linux-x86_64.sh -O cmakebin/cmake-3.13.2-Linux-x86_64.sh
         fi

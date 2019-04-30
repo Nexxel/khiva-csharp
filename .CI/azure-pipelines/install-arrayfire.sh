@@ -13,7 +13,6 @@ if [[ "$AGENT_OS" == "Darwin" ]]; then
 
     # Installs arrayfire
     sudo installer -pkg ./installers/arrayfire-no-gl.pkg -target /
-    ls /opt
     echo 'export PATH=$PATH' >> ~/.bash_profile
     echo "PATH:"
     echo $PATH
