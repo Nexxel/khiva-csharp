@@ -63,4 +63,8 @@ jobs:
     pool:
       vmImage: 'vs2017-win2016'
     steps:
-      - script: echo hello from Windows
+      - task: DownloadFile@1
+        inputs:
+          FileUrl: 'https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1'
+        condition: not (Test-Path -Path "C:\Program Files\ArrayFire")
+# Use the environment variables input below to pass secret variables to this script.'
