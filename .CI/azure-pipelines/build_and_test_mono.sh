@@ -5,10 +5,5 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-if [[ "$AGENT_OS" == "Darwin" ]]; then
-    msbuild /p:Configuration=Debug /p:platform=x64 Khiva.sln
-    nunit-console test/bin/x64/Debug/Khiva.Tests.dll
-else
-    msbuild /p:Configuration=Debug /p:platform=x64 Khiva.sln
-    mono ./packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./test/bin/x64/Debug/Khiva.Tests.dll --config=Debug
-fi
+msbuild /p:Configuration=Debug /p:platform=x64 Khiva.sln
+mono ./packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./test/bin/x64/Debug/Khiva.Tests.dll --config=Debug
