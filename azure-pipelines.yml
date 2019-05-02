@@ -32,7 +32,6 @@ jobs:
   - job: macOS
     pool:
       vmImage: 'macOS-10.14'
-      runtime: 9.1
     steps:
       - checkout: self
         clean: true
