@@ -89,7 +89,7 @@ jobs:
         inputs:
           targetType: 'inline'
           script: 'if ($env:INSTALL_KHIVA_METHOD -eq "installer"){
-            if(!(Test-Path -Path "C:\Program Files\Khiva" )){ appveyor DownloadFile "https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-unattended.exe" -FileName khiva-v0.2.2-unattended.exe };
+            if(!(Test-Path -Path "C:\Program Files\Khiva" )){ wget "https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-unattended.exe" };
             if(!(Test-Path -Path "C:\Program Files\Khiva" )){ .\khiva-v0.2.2-unattended.exe /S };
           }else{
             git clone -q https://github.com/shapelets/khiva.git C:\khiva-library ;
@@ -122,17 +122,16 @@ jobs:
         inputs:
           testSelector: 'testAssemblies'
           testAssemblyVer2: '**\*Tests*.dll
-!**\*TestAdapter.dll
 !**\obj\**'
           codeCoverageEnabled: true
           platform: 'x64'
           configuration: 'Debug'
       - script: codecov -f coverage.xml -t $(codecov_t)
         condition: succeeded()
-      - task: PowerShell@2
+      - task: PublishTestResults@2
         inputs:
-          targetType: 'inline'
-          script: '|
-      $file = Get-Item ''.\TestResult.xml''
-      (New-Object System.Net.WebClient).UploadFile("https://ci.appveyor.com/api/testresults/nunit3/$($env:APPVEYOR_JOB_ID)", $file.FullName)'
-        condition: succeeded()
+          testRunner: 'NUnit'
+          testResultsFiles: '**/TestResult.xml'
+          testRunTitle: 'Test results'
+          platform: 'x64'
+          configuration: 'Debug'
