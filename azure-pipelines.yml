@@ -14,6 +14,7 @@ jobs:
         inputs:
           versionSpec: '3.7'
           architecture: 'x64'
+        displayName: "Use Python 3.7"
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
@@ -33,6 +34,15 @@ jobs:
       - script: bash <(curl -s https://codecov.io/bash) -t $(codecov_t)
         condition: succeeded()
         displayName: "Codecov"
+      - task: PublishTestResults@2
+        inputs:
+          testRunner: 'NUnit'
+          testResultsFiles: '**/TestResult.xml'
+          testRunTitle: 'Test results'
+          platform: 'x64'
+          configuration: 'Debug'
+          displayName: "Publish test results"
+          condition: succeeded()
 
   - job: macOS
     pool:
@@ -44,6 +54,7 @@ jobs:
         inputs:
           versionSpec: '3.7'
           architecture: 'x64'
+        displayName: "Use Python 3.7"
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
@@ -63,6 +74,15 @@ jobs:
       - script: bash <(curl -s https://codecov.io/bash) -t $(codecov_t)
         condition: succeeded()
         displayName: "Codecov"
+      - task: PublishTestResults@2
+        inputs:
+          testRunner: 'NUnit'
+          testResultsFiles: '**/TestResult.xml'
+          testRunTitle: 'Test results'
+          platform: 'x64'
+          configuration: 'Debug'
+          displayName: "Publish test results"
+          condition: succeeded()
 
   - job: Windows
     pool:
@@ -74,17 +94,17 @@ jobs:
         inputs:
           targetType: 'inline'
           script: 'wget https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1 -O ArrayFire-v3.6.2.zip'
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: 'ls'
+        displayName: "Download ArrayFire"
       - task: ExtractFiles@1
         inputs:
           archiveFilePatterns: 'ArrayFire-v3.6.2.zip'
           destinationFolder: 'C:\Program Files'
           cleanDestinationFolder: false
+        displayName: "Extract ArrayFire zip"
       - script: reg add HKCU\Software\Kitware\CMake\Packages\ArrayFire /v ArrayFire_CMake_DIR /d "C:\Program Files\ArrayFire\v3\cmake" /f
+        displayName: "Reg add"
       - script: vcpkg install --triplet x64-windows gtest eigen3
+        displayName: "Download ArrayFire dependencies"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
@@ -101,6 +121,7 @@ jobs:
           }'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
+        displayName: "Install khiva"
       - script: |
           cd c:\projects\khiva-csharp
           choco install Codecov
@@ -108,6 +129,7 @@ jobs:
         inputs:
           versionSpec: '3.7'
           architecture: 'x64'
+        displayName: "Use Python 3.7"
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
@@ -120,6 +142,7 @@ jobs:
           maximumCpuCount: true
           restoreNugetPackages: true
           msbuildArchitecture: 'x64'
+        displayName: "Build solution Khiva.sln"
       - task: VSTest@2
         inputs:
           testSelector: 'testAssemblies'
@@ -128,8 +151,10 @@ jobs:
           codeCoverageEnabled: true
           platform: 'x64'
           configuration: 'Debug'
+        displayName: "Run tests"
       - script: codecov -f coverage.xml -t $(codecov_t)
         condition: succeeded()
+        displayName: "Codecov" 
       - task: PublishTestResults@2
         inputs:
           testRunner: 'NUnit'
@@ -137,3 +162,4 @@ jobs:
           testRunTitle: 'Test results'
           platform: 'x64'
           configuration: 'Debug'
+          displayName: "Publish test results"
