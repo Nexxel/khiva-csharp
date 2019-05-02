@@ -73,7 +73,7 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'wget https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1'
+          script: 'wget https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1 -O ArrayFire-v3.6.2.zip'
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
