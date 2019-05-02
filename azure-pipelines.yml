@@ -15,7 +15,7 @@ jobs:
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: '>=4.7.2'
+          versionSpec: '<4.8'
           checkLatest: true
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
@@ -46,7 +46,7 @@ jobs:
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: '>=4.7.2'
+          versionSpec: '<4.8'
           checkLatest: true
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
