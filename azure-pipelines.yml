@@ -69,10 +69,11 @@ jobs:
       - task: DownloadFile@1
         inputs:
           FileUrl: 'https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip'
-      - task: PowerShell@2
+      - task: ExtractFiles@1
         inputs:
-          targetType: 'inline'
-          script: '7z x ArrayFire-v3.6.2.zip -o"C:\Program Files"'
+          archiveFilePatterns: 'ArrayFire-v3.6.2.zip'
+          destinationFolder: 'C:\Program Files'
+          cleanDestinationFolder: false
       - script: reg add HKCU\Software\Kitware\CMake\Packages\ArrayFire /v ArrayFire_CMake_DIR /d "C:\Program Files\ArrayFire\v3\cmake" /f
       - script: vcpkg install --triplet x64-windows gtest eigen3
       - task: PowerShell@2
