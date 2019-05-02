@@ -1,5 +1,7 @@
 variables:
 - group: khiva-csharp-VG
+- name: codecov_t
+  value: $(CODECOV_TOKEN)
 
 jobs:
   - job: Linux
@@ -15,8 +17,7 @@ jobs:
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: '<4.8'
-          checkLatest: true
+          versionSpec: '4.7.2'
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
@@ -29,7 +30,7 @@ jobs:
         displayName: "Install"
       - script: source .CI/azure-pipelines/build_and_test_mono.sh
         displayName: "Build and test"
-      - script: bash <(curl -s https://codecov.io/bash -t $(CODECOV_TOKEN))
+      - script: bash <(curl -s https://codecov.io/bash -t $(codecov_t))
         condition: succeeded()
         displayName: "Codecov"
 
@@ -46,8 +47,7 @@ jobs:
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: '<4.8'
-          checkLatest: true
+          versionSpec: '4.7.2'
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
@@ -60,7 +60,7 @@ jobs:
         displayName: "Install"
       - script: source .CI/azure-pipelines/build_and_test_mono.sh
         displayName: "Build and test"
-      - script: bash <(curl -s https://codecov.io/bash -t $(CODECOV_TOKEN))
+      - script: bash <(curl -s https://codecov.io/bash -t $(codecov_t))
         condition: succeeded()
         displayName: "Codecov"
 
@@ -127,7 +127,7 @@ jobs:
           codeCoverageEnabled: true
           platform: 'x64'
           configuration: 'Debug'
-      - script: codecov -f coverage.xml -t $(CODECOV_TOKEN)
+      - script: codecov -f coverage.xml -t $(codecov_t)
         condition: succeeded()
       - task: PowerShell@2
         inputs:
