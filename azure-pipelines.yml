@@ -15,7 +15,8 @@ jobs:
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: 4.7.2
+          versionSpec: '>=4.7.2'
+          checkLatest: true
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
@@ -45,7 +46,8 @@ jobs:
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: 4.7.2
+          versionSpec: '>=4.7.2'
+          checkLatest: true
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
@@ -106,7 +108,8 @@ jobs:
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: 4.7.2
+          versionSpec: '>=4.7.2'
+          checkLatest: true
       - task: VSBuild@1
         inputs:
           solution: 'Khiva.sln'
