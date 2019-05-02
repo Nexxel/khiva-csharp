@@ -186,7 +186,8 @@ namespace Khiva.Tests
                         var subsequence = subsequenceArr.GetData1D<uint>();
                         Assert.AreEqual(12, subsequence[0]);
                         var travis = Environment.GetEnvironmentVariable("TRAVIS");
-                        if (travis != null)
+                        var azure = Environment.GetEnvironmentVariable("TF_BUILD");
+                        if (travis != null || azure != null)
                         {
                             Assert.AreEqual(11, subsequence[1]);
                         }
