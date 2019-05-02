@@ -73,8 +73,15 @@ jobs:
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
         displayName: "Install ArrayFire and Khiva"
-      - script: source .CI/azure-pipelines/build_and_test_mono.sh
-        displayName: "Build and test"
+      - task: MSBuild@1
+        inputs:
+          solution: 'Khiva.sln'
+          msbuildArchitecture: 'x64'
+          platform: 'x64'
+          configuration: 'Debug'
+        displayName: "Build"
+      - script: mono ./packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./test/bin/x64/Debug/Khiva.Tests.dll --config=Debug
+        displayName: "Test"
       - script: bash <(curl -s https://codecov.io/bash) -t $(codecov_t)
         condition: succeeded()
         displayName: "Codecov"
