@@ -65,18 +65,13 @@ jobs:
     steps:
       - checkout: self
         clean: true
-      - task: DownloadFile@1
+      - task: DownloadGitHubRelease@0
         inputs:
-          FileUrl: 'https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip'
-      - task: PowerShell@2
-        inputs:
-          targetType: 'inline'
-          script: 'ls'
-      - task: ExtractFiles@1
-        inputs:
-          archiveFilePatterns: 'ArrayFire-v3.6.2.zip'
-          destinationFolder: 'C:\Program Files'
-          cleanDestinationFolder: false
+          connection: Khiva-csharp connection
+          userRepository: arrayfire/arrayfire
+          defaultVersionType: 'specificTag'
+          version: v3.6.2
+          downloadPath: 'C:\Program Files' 
       - script: reg add HKCU\Software\Kitware\CMake\Packages\ArrayFire /v ArrayFire_CMake_DIR /d "C:\Program Files\ArrayFire\v3\cmake" /f
       - script: vcpkg install --triplet x64-windows gtest eigen3
       - task: PowerShell@2
