@@ -30,7 +30,7 @@ jobs:
         displayName: "Install"
       - script: source .CI/azure-pipelines/build_and_test_mono.sh
         displayName: "Build and test"
-      - script: bash <(curl -s https://codecov.io/bash -t $(codecov_t))
+      - script: bash <(curl -s https://codecov.io/bash) -t $(codecov_t)
         condition: succeeded()
         displayName: "Codecov"
 
@@ -60,7 +60,7 @@ jobs:
         displayName: "Install"
       - script: source .CI/azure-pipelines/build_and_test_mono.sh
         displayName: "Build and test"
-      - script: bash <(curl -s https://codecov.io/bash -t $(codecov_t))
+      - script: bash <(curl -s https://codecov.io/bash) -t $(codecov_t)
         condition: succeeded()
         displayName: "Codecov"
 
@@ -108,8 +108,7 @@ jobs:
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: '>=4.7.2'
-          checkLatest: true
+          versionSpec: '4.7.2'
       - task: VSBuild@1
         inputs:
           solution: 'Khiva.sln'
