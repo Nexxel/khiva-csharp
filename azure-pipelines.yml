@@ -129,6 +129,7 @@ jobs:
       - script: |
           cd c:\projects\khiva-csharp
           choco install Codecov
+        displayName: "Install codecov"
       - task: UsePythonVersion@0
         inputs:
           versionSpec: '3.7'
