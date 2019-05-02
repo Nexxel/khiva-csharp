@@ -54,6 +54,8 @@ jobs:
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
         displayName: "Install"
+      - script: csc /langversion:?
+        displayName: "Possible lang versions"
       - script: source .CI/azure-pipelines/build_and_test_mono.sh
         displayName: "Build and test"
       - script: bash <(curl -s https://codecov.io/bash)
