@@ -1,3 +1,6 @@
+variables:
+- group: khiva-csharp-VG
+
 jobs:
   - job: Linux
     pool:
