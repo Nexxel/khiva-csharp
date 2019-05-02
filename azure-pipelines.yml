@@ -89,7 +89,7 @@ jobs:
         inputs:
           targetType: 'inline'
           script: 'if ($env:INSTALL_KHIVA_METHOD -eq "installer"){
-            if(!(Test-Path -Path "C:\Program Files\Khiva" )){ wget "https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-unattended.exe" };
+            if(!(Test-Path -Path "C:\Program Files\Khiva" )){ wget https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-unattended.exe -O khiva-v0.2.2-unattended.exe};
             if(!(Test-Path -Path "C:\Program Files\Khiva" )){ .\khiva-v0.2.2-unattended.exe /S };
           }else{
             git clone -q https://github.com/shapelets/khiva.git C:\khiva-library ;
@@ -99,6 +99,8 @@ jobs:
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake -DBOOST_ROOT="$($env:BOOST_PATH)" -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
             cmake --build . --config Debug --target INSTALL -- /m;
           }'
+        env: 
+          GENERATOR: "Visual Studio 15 2017 Win64"
       - script: |
           cd c:\projects\khiva-csharp
           choco install Codecov
