@@ -63,6 +63,7 @@ jobs:
         displayName: Install SDK 2.2.203
         inputs:
           version: '2.2.203'
+      - script: dotnet --version
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
@@ -73,6 +74,11 @@ jobs:
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
         displayName: "Install ArrayFire and Khiva"
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'build'
+          projects: 'Khiva.sln'
+          arguments: 'platform: x64 configuration: Debug'
       - task: MSBuild@1
         inputs:
           solution: 'Khiva.sln'
