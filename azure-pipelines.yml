@@ -59,11 +59,12 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
-      - task: DotNetCoreInstaller@0
-        displayName: Install SDK 2.2.203
+      - task: MSBuild@1
         inputs:
-          version: '2.2.203'
-      - script: dotnet --version
+          solution: 'Khiva.sln'
+          msbuildArchitecture: 'x64'
+          configuration: 'Release'
+          clean: true
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
