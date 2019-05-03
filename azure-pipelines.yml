@@ -133,7 +133,7 @@ jobs:
             cd C:\khiva-library;
             mkdir build;
             cd build;
-            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -DBOOST_ROOT="C:\Libraries\boost_1_67_0" -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
+            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -BOOST_ROOT="C:\Libraries\boost_1_67_0" -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
             cmake --build . --config Debug --target INSTALL -- /m;
           }'
         env: 
