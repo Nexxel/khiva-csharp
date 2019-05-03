@@ -59,18 +59,18 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
-      - task: MSBuild@1
-        inputs:
-          solution: 'Khiva.sln'
-          msbuildArchitecture: 'x64'
-          configuration: 'Release'
-          clean: true
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
           command: 'restore'
           solution: 'Khiva.sln'
           verbosityRestore: 'Quiet'
+      - task: MSBuild@1
+        inputs:
+          solution: 'Khiva.sln'
+          msbuildArchitecture: 'x64'
+          configuration: 'Release'
+          clean: true
       - script: |
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
