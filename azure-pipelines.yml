@@ -96,16 +96,16 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'if(!(Test-Path -Path "C:\Program Files\ArrayFire" )){wget https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1 -O ArrayFire-v3.6.2.zip }'
+          script: 'if(!(Test-Path -Path "C:/Program Files/ArrayFire" )){wget https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1 -O ArrayFire-v3.6.2.zip }'
         displayName: "Download ArrayFire"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'if(!(Test-Path -Path "C:\Program Files\ArrayFire" )){ 7z x ArrayFire-v3.6.2.zip -o"C:\Program Files" }'
+          script: 'if(!(Test-Path -Path "C:/Program Files/ArrayFire" )){ 7z x ArrayFire-v3.6.2.zip -o"C:/Program Files" }'
         displayName: "Extract ArrayFire zip"
-      - script: ls "C:\Program Files"
-      - script: ls "C:\Program Files\Boost"
-      - script: reg add HKCU\Software\Kitware\CMake\Packages\ArrayFire /v ArrayFire_CMake_DIR /d "C:\Program Files\ArrayFire\v3\cmake" /f
+      - script: ls "C:/Program Files"
+      - script: ls "C:/Program Files/Boost"
+      - script: reg add HKCU/Software/Kitware/CMake/Packages/ArrayFire /v ArrayFire_CMake_DIR /d "C:/Program Files/ArrayFire/v3/cmake" /f
         displayName: "Reg add"
       - script: vcpkg install --triplet x64-windows gtest eigen3
         displayName: "Download ArrayFire dependencies"
@@ -117,11 +117,11 @@ jobs:
         inputs:
           targetType: 'inline'
           script: 'if ($env:INSTALL_KHIVA_METHOD -eq "installer"){
-            if(!(Test-Path -Path "C:\Program Files\Khiva" )){ wget https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-unattended.exe -O khiva-v0.2.2-unattended.exe};
-            if(!(Test-Path -Path "C:\Program Files\Khiva" )){ .\khiva-v0.2.2-unattended.exe /S };
+            if(!(Test-Path -Path "C:/Program Files/Khiva" )){ wget https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-unattended.exe -O khiva-v0.2.2-unattended.exe};
+            if(!(Test-Path -Path "C:/Program Files/Khiva" )){ ./khiva-v0.2.2-unattended.exe /S };
           }else{
-            git clone -q https://github.com/shapelets/khiva.git C:\khiva-library ;
-            cd C:\khiva-library;
+            git clone -q https://github.com/shapelets/khiva.git C:/khiva-library ;
+            cd C:/khiva-library;
             mkdir build;
             cd build;
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -DBOOST_ROOT=$env:BOOST_PATH -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
@@ -129,10 +129,10 @@ jobs:
           }'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
-          BOOST_PATH: "C:\Libraries\boost_1_67_0"
+          BOOST_PATH: "C:/Program Files/Boost/1.69.0"
         displayName: "Install khiva"
       - script: |
-          cd c:\projects\khiva-csharp
+          cd c:/projects/khiva-csharp
           choco install Codecov
         displayName: "Install codecov"
       - task: UsePythonVersion@0
@@ -156,8 +156,8 @@ jobs:
       - task: VSTest@2
         inputs:
           testSelector: 'testAssemblies'
-          testAssemblyVer2: '**\*Tests*.dll
-!**\obj\**'
+          testAssemblyVer2: '**/*Tests*.dll
+!**/obj/**'
           codeCoverageEnabled: true
           platform: 'x64'
           configuration: 'Debug'
