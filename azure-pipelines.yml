@@ -59,19 +59,29 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
-      - task: NuGetCommand@2
-        displayName: "Nuget restore Khiva.sln"
+      - task: MSBuild@1
         inputs:
-          command: 'restore'
           solution: 'Khiva.sln'
-          verbosityRestore: 'Quiet'
-      - script: dotnet build Khiva.sln --configuration Release
+          msbuildVersion: '15.0'
+          msbuildArchitecture: 'x64'
+          platform: 'x64'
+          configuration: 'Debug'
+          clean: true
+          maximumCpuCount: true
+          restoreNugetPackages: true
       - script: |
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
         displayName: "Install ArrayFire and Khiva"
-      - script: dotnet build Khiva.sln --configuration Debug
-        displayName: "Build"
+      - task: MSBuild@1
+        inputs:
+          solution: 'Khiva.sln'
+          msbuildVersion: '15.0'
+          msbuildArchitecture: 'x64'
+          platform: 'x64'
+          configuration: 'Debug'
+          maximumCpuCount: true
+          restoreNugetPackages: true
       - script: mono ./packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./test/bin/x64/Debug/Khiva.Tests.dll --config=Debug
         displayName: "Test"
       - script: bash <(curl -s https://codecov.io/bash) -t $(codecov_t)
@@ -93,7 +103,6 @@ jobs:
     steps:
       - checkout: self
         clean: true
-        displayName: "CMAKE version"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
