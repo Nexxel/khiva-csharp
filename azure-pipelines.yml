@@ -115,8 +115,8 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'ls C:
-                  ls C:\Libraries'
+          script: 'ls C:/
+                  ls C:/Libraries'
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
