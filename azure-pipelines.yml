@@ -96,13 +96,12 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'wget https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1 -O ArrayFire-v3.6.2.zip'
+          script: 'if(!(Test-Path -Path "C:\Program Files\ArrayFire" )){wget https://www.dropbox.com/s/13wnbd1qynjmw0i/ArrayFire-v3.6.2.zip?dl=1 -O ArrayFire-v3.6.2.zip }'
         displayName: "Download ArrayFire"
-      - task: ExtractFiles@1
+      - task: PowerShell@2
         inputs:
-          archiveFilePatterns: 'ArrayFire-v3.6.2.zip'
-          destinationFolder: 'C:\Program Files'
-          cleanDestinationFolder: false
+          targetType: 'inline'
+          script: 'if(!(Test-Path -Path "C:\Program Files\ArrayFire" )){ 7z x ArrayFire-v3.6.2.zip -o"C:\Program Files" }'
         displayName: "Extract ArrayFire zip"
       - script: ls "C:\Program Files"
       - script: reg add HKCU\Software\Kitware\CMake\Packages\ArrayFire /v ArrayFire_CMake_DIR /d "C:\Program Files\ArrayFire\v3\cmake" /f
