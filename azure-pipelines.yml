@@ -115,7 +115,7 @@ jobs:
             cd C:/khiva-library;
             mkdir build;
             cd build;
-            pip install conan -I
+            pip install conan
             conan install .. --build missing
             cmake .. -G"$env:GENERATOR";
             cmake --build . --config Release -- /m;
