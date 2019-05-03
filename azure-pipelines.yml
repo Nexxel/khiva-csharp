@@ -112,9 +112,11 @@ jobs:
         displayName: "Reg add"
       - script: vcpkg install --triplet x64-windows gtest eigen3
         displayName: "Download ArrayFire dependencies"
-      - script: |
-          ls C:
-          ls C:\Libraries
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: 'ls C:
+                  ls C:\Libraries'
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
