@@ -84,9 +84,6 @@ jobs:
     steps:
       - checkout: self
         clean: true
-      - script: |
-          choco install cmake --version 3.13.3 --allow-downgrade
-          choco install boost-msvc-12
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
@@ -118,12 +115,13 @@ jobs:
             cd C:/khiva-library;
             mkdir build;
             cd build;
-            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -DKHIVA_USE_CONAN=OFF -G"$env:GENERATOR";
-            cmake --build . --config Debug --target INSTALL -- /m;
+            pip install conan -I
+            conan install .. --build missing
+            cmake .. -G"$env:GENERATOR";
+            cmake --build . --config Release -- /m;
           }'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
-          BOOST_PATH: "C:/Program Files/Boost/1.69.0"
         displayName: "Install khiva"
       - script: |
           cd c:/projects/khiva-csharp
