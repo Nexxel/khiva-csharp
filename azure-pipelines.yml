@@ -106,7 +106,7 @@ jobs:
         displayName: "Extract ArrayFire zip"
       - script: ls "C:/Program Files"
       - script: ls "C:/Program Files/Boost"
-      - script: reg add HKCU/Software/Kitware/CMake/Packages/ArrayFire /v ArrayFire_CMake_DIR /d "C:/Program Files/ArrayFire/v3/cmake" /f
+      - script: reg add HKCU\Software\Kitware\CMake\Packages\ArrayFire /v ArrayFire_CMake_DIR /d "C:/Program Files/ArrayFire/v3/cmake" /f
         displayName: "Reg add"
       - script: vcpkg install --triplet x64-windows gtest eigen3
         displayName: "Download ArrayFire dependencies"
