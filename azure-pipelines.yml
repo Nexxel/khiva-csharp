@@ -59,16 +59,6 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
-      - task: MSBuild@1
-        inputs:
-          solution: 'Khiva.sln'
-          msbuildVersion: '15.0'
-          msbuildArchitecture: 'x64'
-          platform: 'x64'
-          configuration: 'Debug'
-          clean: true
-          maximumCpuCount: true
-          restoreNugetPackages: true
       - script: |
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
