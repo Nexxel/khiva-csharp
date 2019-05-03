@@ -85,7 +85,8 @@ jobs:
       - checkout: self
         clean: true
       - script: |
-          choco install cmake --version 3.13.3
+          choco install cmake --version 3.13.3 --force
+          choco install boost-msvc-12
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
