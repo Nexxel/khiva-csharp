@@ -104,6 +104,7 @@ jobs:
           destinationFolder: 'C:\Program Files'
           cleanDestinationFolder: false
         displayName: "Extract ArrayFire zip"
+      - script: ls "C:\Program Files"
       - script: reg add HKCU\Software\Kitware\CMake\Packages\ArrayFire /v ArrayFire_CMake_DIR /d "C:\Program Files\ArrayFire\v3\cmake" /f
         displayName: "Reg add"
       - script: vcpkg install --triplet x64-windows gtest eigen3
@@ -123,7 +124,7 @@ jobs:
             cd C:\khiva-library;
             mkdir build;
             cd build;
-            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -Boost_ROOT="C:/Libraries/boost_1_67_0" -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
+            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -DBoost_ROOT="C:/Libraries/boost_1_67_0" -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
             cmake --build . --config Debug --target INSTALL -- /m;
           }'
         env: 
