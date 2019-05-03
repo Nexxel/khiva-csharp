@@ -16,9 +16,9 @@ jobs:
           architecture: 'x64'
         displayName: "Use Python 3.7"
       - task: NuGetToolInstaller@0
-        displayName: 'Use NuGet 4.7.1'
+        displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: '4.7.1'
+          versionSpec: '4.7.2'
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
@@ -56,9 +56,9 @@ jobs:
           architecture: 'x64'
         displayName: "Use Python 3.7"
       - task: NuGetToolInstaller@0
-        displayName: 'Use NuGet 4.7.1'
+        displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: '4.7.1'
+          versionSpec: '4.7.2'
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
@@ -141,9 +141,9 @@ jobs:
           architecture: 'x64'
         displayName: "Use Python 3.7"
       - task: NuGetToolInstaller@0
-        displayName: 'Use NuGet 4.7.1'
+        displayName: 'Use NuGet 4.7.2'
         inputs:
-          versionSpec: '4.7.1'
+          versionSpec: '4.7.2'
       - task: VSBuild@1
         inputs:
           solution: 'Khiva.sln'
