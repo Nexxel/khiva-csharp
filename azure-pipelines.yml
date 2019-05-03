@@ -78,7 +78,7 @@ jobs:
         inputs:
           command: 'build'
           projects: 'Khiva.sln'
-          arguments: 'platform: x64 configuration: Debug'
+          arguments: '--platform x64 --configuration Debug'
       - task: MSBuild@1
         inputs:
           solution: 'Khiva.sln'
