@@ -93,7 +93,9 @@ jobs:
     steps:
       - checkout: self
         clean: true
-      - script: cmake --version
+      - script: | 
+          brew install cmake==3.13.3
+          cmake --version
         displayName: "CMAKE version"
       - task: PowerShell@2
         inputs:
