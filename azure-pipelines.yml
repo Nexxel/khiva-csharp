@@ -119,7 +119,7 @@ jobs:
             cmake --build . --config Debug --target INSTALL -- /m;
           }'
         env: 
-          GENERATOR: "Visual Studio 15 2017"
+          GENERATOR: "Visual Studio 15 2017 Win64"
           BOOST_PATH: "C:/Program Files/Boost/1.69.0"
         displayName: "Install khiva"
       - script: |
