@@ -74,17 +74,7 @@ jobs:
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
         displayName: "Install ArrayFire and Khiva"
-      - task: DotNetCoreCLI@2
-        inputs:
-          command: 'build'
-          projects: 'Khiva.sln'
-          arguments: '--platform x64 --configuration Debug'
-      - task: MSBuild@1
-        inputs:
-          solution: 'Khiva.sln'
-          msbuildArchitecture: 'x64'
-          platform: 'x64'
-          configuration: 'Debug'
+      - script: dotnet build Khiva.sln --configuration Debug
         displayName: "Build"
       - script: mono ./packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./test/bin/x64/Debug/Khiva.Tests.dll --config=Debug
         displayName: "Test"
@@ -136,7 +126,7 @@ jobs:
             cd C:\khiva-library;
             mkdir build;
             cd build;
-            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -BOOST_ROOT="C:\Libraries\boost_1_67_0" -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
+            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -Boost_ROOT="C:/Libraries/boost_1_67_0" -DKHIVA_USE_CONAN=OFF -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -G"$env:GENERATOR";
             cmake --build . --config Debug --target INSTALL -- /m;
           }'
         env: 
