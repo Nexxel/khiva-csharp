@@ -92,6 +92,13 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
+      - task: DownloadGitHubRelease@2
+        inputs:
+          connection: Khiva-csharp connection
+          userRepository: google/googletest
+          defaultVersionType: 'latest' # Options: latest, specificVersion, specificTag
+          downloadPath: '$(System.ArtifactsDirectory)' 
+        displayName: "Install GoogleTest"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
