@@ -100,10 +100,7 @@ jobs:
           cmake -DCMAKE_CXX_COMPILER="c++" -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++" .. 
           cd ..
           ls .
-          mv "Makefile.am" "Makefile"
-          make
-          echo "Second make"
-          make install
+          automake
         displayName: "Install GoogleTest"
       - task: PowerShell@2
         inputs:
