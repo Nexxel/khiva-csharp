@@ -92,16 +92,6 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
-      - script: |
-          git clone https://github.com/google/googletest.git
-          cd googletest 
-          mkdir install
-          cd install
-          cmake -DCMAKE_CXX_COMPILER="c++" -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++" .. 
-          cd ..
-          ls .
-          build BUILD.bazel
-        displayName: "Install GoogleTest"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
@@ -130,7 +120,7 @@ jobs:
             pip install conan ;
             conan remote add conan-mpusz https://api.bintray.com/conan/mpusz/conan-mpusz ;
             conan install .. --build missing ;
-            cmake .. -G"$env:GENERATOR" ;
+            cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
           }'
         env: 
