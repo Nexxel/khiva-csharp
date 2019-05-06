@@ -98,7 +98,7 @@ jobs:
           mkdir install
           cd install
           cmake -DCMAKE_CXX_COMPILER="c++" -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++" .. 
-          make .
+          make
           sudo make install 
         displayName: "Install GoogleTest"
       - task: PowerShell@2
