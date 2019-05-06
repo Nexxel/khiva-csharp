@@ -78,7 +78,7 @@ jobs:
         inputs:
           projects: 'Khiva.sln'
           command: build
-          arguments: /P:SourceLinkCreate=false --configuration Debug --platform x64
+          arguments: /P:SourceLinkCreate=false --configuration Debug
         displayName: Build
       - script: mono ./packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./test/bin/x64/Debug/Khiva.Tests.dll --config=Debug
         displayName: Test
