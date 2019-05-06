@@ -93,8 +93,6 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
-      - script: pip install conan -I
-        displayName: "Install conan"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
@@ -120,6 +118,8 @@ jobs:
             cd C:/khiva-library ;
             mkdir build ;
             cd build ;
+            pip install conan ;
+            conan remote add conan-mpusz https://api.bintray.com/conan/mpusz/conan-mpusz ;
             conan install .. --build missing ;
             cmake .. -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
