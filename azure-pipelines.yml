@@ -92,7 +92,7 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
-      - task: DownloadGitHubRelease@2
+      - task: DownloadGitHubRelease@0
         inputs:
           connection: Khiva-csharp connection
           userRepository: google/googletest
