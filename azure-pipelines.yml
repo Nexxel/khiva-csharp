@@ -64,6 +64,12 @@ jobs:
           packageType: 'sdk'
           version: '3.0.100-preview3-010431' 
         displayName: Install .NET Core 3
+      - task: NuGetCommand@2
+        displayName: "Nuget restore Khiva.sln"
+        inputs:
+          command: 'restore'
+          solution: 'Khiva.sln'
+          verbosityRestore: 'Quiet'
       - script: |
           source .CI/azure-pipelines/install-arrayfire.sh
           source .CI/azure-pipelines/install-khiva.sh
