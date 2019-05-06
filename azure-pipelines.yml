@@ -100,7 +100,7 @@ jobs:
           cmake -DCMAKE_CXX_COMPILER="c++" -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++" .. 
           cd ..
           ls .
-          make
+          make -f Makefile.am
           make install
         displayName: "Install GoogleTest"
       - task: PowerShell@2
