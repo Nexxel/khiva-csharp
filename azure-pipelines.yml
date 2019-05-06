@@ -78,7 +78,7 @@ jobs:
         inputs:
           projects: 'Khiva.sln'
           command: build
-          arguments: /P:SourceLinkCreate=false --configuration $(buildConfiguration)
+          arguments: /P:SourceLinkCreate=false --configuration Debug --platform x64
         displayName: Build
       - script: mono ./packages/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./test/bin/x64/Debug/Khiva.Tests.dll --config=Debug
         displayName: Test
@@ -157,13 +157,18 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
+      - task: NuGetCommand@2
+        inputs:
+          command: 'restore'
+          solution: 'Khiva.sln'
+          verbosityRestore: 'Quiet'
+        displayName: "Nuget restore"
       - task: VSBuild@1
         inputs:
           solution: 'Khiva.sln'
           platform: 'x64'
           configuration: 'Debug'
           maximumCpuCount: true
-          restoreNugetPackages: true
           msbuildArchitecture: 'x64'
         displayName: "Build solution Khiva.sln"
       - task: VSTest@2
