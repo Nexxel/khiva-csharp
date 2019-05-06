@@ -145,7 +145,7 @@ jobs:
           GENERATOR: "Visual Studio 15 2017 Win64"
         displayName: "Install khiva"
       - script: |
-          cd c:/projects/khiva-csharp
+          cd khiva-csharp
           choco install Codecov
         displayName: "Install codecov"
       - task: UsePythonVersion@0
