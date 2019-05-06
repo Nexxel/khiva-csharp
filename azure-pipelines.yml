@@ -93,14 +93,14 @@ jobs:
         inputs:
           versionSpec: '4.7.2'
       - script: |
-          git clone https://github.com/google/googletest.git 
+          git clone https://github.com/google/googletest.git
           cd googletest 
           mkdir install
           cd install
           cmake -DCMAKE_CXX_COMPILER="c++" -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++" .. 
           cd ..
           ls .
-          make -f Makefile.am
+          make
           echo "Second make"
           make install
         displayName: "Install GoogleTest"
