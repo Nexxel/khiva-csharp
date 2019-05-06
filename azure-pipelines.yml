@@ -96,7 +96,7 @@ jobs:
         inputs:
           connection: Khiva-csharp connection
           userRepository: google/googletest
-          defaultVersionType: 'latest' # Options: latest, specificVersion, specificTag
+          defaultVersionType: 'latest'
           downloadPath: '$(System.ArtifactsDirectory)' 
         displayName: "Install GoogleTest"
       - task: PowerShell@2
