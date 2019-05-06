@@ -100,6 +100,8 @@ jobs:
           cmake -DCMAKE_CXX_COMPILER="c++" -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++" .. 
           cd ..
           ls .
+          make clean
+          ./configure
           make
           echo "Second make"
           make install
