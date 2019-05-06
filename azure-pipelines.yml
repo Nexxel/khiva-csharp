@@ -140,8 +140,8 @@ jobs:
             conan install .. --build missing ;
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
-            PATH=C:/Program Files/Khiva/v0;$(PATH) ;
-          }'
+          };
+          PATH=C:/Program Files/Khiva/v0;$(PATH) ;'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
         displayName: "Install khiva"
