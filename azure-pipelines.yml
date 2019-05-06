@@ -92,12 +92,14 @@ jobs:
         displayName: 'Use NuGet 4.7.2'
         inputs:
           versionSpec: '4.7.2'
-      - task: DownloadGitHubRelease@0
-        inputs:
-          connection: Khiva-csharp connection
-          userRepository: google/googletest
-          defaultVersionType: 'latest'
-          downloadPath: '$(System.ArtifactsDirectory)' 
+      - script: |
+          git clone https://github.com/google/googletest.git 
+          cd googletest/ 
+          mkdir install
+          cd install
+          cmake -DCMAKE_CXX_COMPILER="c++" -DCMAKE_CXX_FLAGS="-std=c++11 -stdlib=libc++" ../  
+          make 
+          sudo make install 
         displayName: "Install GoogleTest"
       - task: PowerShell@2
         inputs:
