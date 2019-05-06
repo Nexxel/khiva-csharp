@@ -109,7 +109,7 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
-          script: 'if ($env:INSTALL_KHIVA_METHOD -eq "installer"){
+          script: 'if ($INSTALL_KHIVA_METHOD -eq "installer"){
             if(!(Test-Path -Path "C:/Program Files/Khiva" )){ wget https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-unattended.exe -O khiva-v0.2.2-unattended.exe};
             if(!(Test-Path -Path "C:/Program Files/Khiva" )){ ./khiva-v0.2.2-unattended.exe /S };
           }else{
