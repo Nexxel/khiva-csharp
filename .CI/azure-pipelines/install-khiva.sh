@@ -8,14 +8,14 @@
 if [[ "$INSTALL_KHIVA_METHOD" == "installer" ]]; then
    if [[ "$AGENT_OS" == "Darwin" ]]; then
         if [ ! -e "./installers/khiva-v0.2.2.pkg" ]; then
-            wget https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-OnlyCPU.pkg -O ./installers/khiva-v0.2.2-OnlyCPU.pkg
+            wget https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2.pkg -O ./installers/khiva-v0.2.2.pkg
         fi
         # Installs Khiva
-        sudo installer -pkg ./installers/khiva-v0.2.2-OnlyCPU.pkg -target /
+        sudo installer -pkg ./installers/khiva-v0.2.2.pkg -target /
     else
         if [ ! -e "./installers/khiva-v0.2.2-ci.sh" ]; then
-            wget https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2-ci.sh -O ./installers/khiva-v0.2.2-ci.sh
-            chmod +x ./installers/khiva-v0.2.2-ci.sh
+            wget https://github.com/shapelets/khiva/releases/download/v0.2.2/khiva-v0.2.2.sh -O ./installers/khiva-v0.2.2.sh
+            chmod +x ./installers/khiva-v0.2.2.sh
         fi
         sudo ./installers/khiva-v0.2.2-ci.sh --prefix=/usr/local --skip-license
         sudo ldconfig
