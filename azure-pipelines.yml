@@ -130,7 +130,7 @@ jobs:
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
           };
-          Write-Host "$("##vso[task.setvariable variable=PATH]") $($Env:PATH + "C:\Program Files\Khiva\v0")";
+          Write-Host "$("##vso[task.setvariable variable=Env:PATH]") $($Env:PATH + "C:\Program Files\Khiva\v0")";
           echo $Env:PATH;'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
@@ -166,13 +166,9 @@ jobs:
         inputs:
           targetType: 'inline'
           script: 'echo $Env:PATH;'
-      - task: VSTest@2
-        inputs:
-          testSelector: 'testAssemblies'
-          testAssemblyVer2: '**/*Tests*.dll'
-          codeCoverageEnabled: true
-          platform: 'x64'
-          configuration: 'Debug'
+      - script: |
+          $Env:PATH += "C:\Program Files\Khiva\v0"
+          dotnet vstest **/*Tests*.dll --codeCoverageEnabled true --platform x64 --configuration Debug
         displayName: "Run tests"
       - script: codecov -f coverage.xml -t $(codecov_t)
         condition: succeeded()
