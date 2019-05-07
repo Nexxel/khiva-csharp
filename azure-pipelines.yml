@@ -57,7 +57,7 @@ jobs:
         displayName: "Use Python 3.7"
       - script: |
           wget https://download.mono-project.com/archive/5.20.1/macos-10-universal/MonoFramework-MDK-5.20.1.19.macos10.xamarin.universal.pkg -O mono.pkg
-          sudo installer -pkg mono.pkg
+          sudo installer -pkg mono.pkg -target \
         displayName: "Install Mono"
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
