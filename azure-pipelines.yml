@@ -95,6 +95,13 @@ jobs:
           versionSpec: '3.7'
           architecture: 'x64'
         displayName: "Use Python 3.7"
+      - task: PythonScript@0
+        inputs:
+          scriptSource: 'inline'
+          script: 'import * as path from ''path'';
+import * as toolLib from ''azure-pipelines-tool-lib/tool'';
+toolLib.prependPath("C:\Program Files\Khiva\v0");'
+        displayName: "Actualize Path with khiva"
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
         inputs:
@@ -130,9 +137,7 @@ jobs:
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
           };
-          $Env:PATH += "C:\Program Files\Khiva\v0";
-          . .CI/azure-pipelines/ActualizeEnv.ps1
-          Send-SettingChange;'
+          echo $(Env:PATH);'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
         displayName: "Install khiva"
