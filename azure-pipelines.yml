@@ -90,6 +90,9 @@ jobs:
     steps:
       - checkout: self
         clean: true
+      - task: PowerShell@2
+        inputs:
+          filePath: '.CI/azure-pipelines/ActualizeEnv.psm1'
       - task: UsePythonVersion@0
         inputs:
           versionSpec: '3.7'
@@ -130,8 +133,8 @@ jobs:
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
           };
-          [Environment]::SetEnvironmentVariable("PATH", "$(PATH)C:\Program Files\Khiva\v0", "User");
-          echo $Env:PATH;'
+          $Env:PATH += "C:\Program Files\Khiva\v0";
+          Send-SettingChange();'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
         displayName: "Install khiva"
