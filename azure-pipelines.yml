@@ -136,7 +136,7 @@ jobs:
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
           };
-          Set-Variable -Name "PATH" - Value ($ENV:PATH + "C:\Program Files\Khiva\v0");
+          Set-Variable -Name "PATH" -Value ($ENV:PATH + "C:\Program Files\Khiva\v0");
           echo $Env:PATH;'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
