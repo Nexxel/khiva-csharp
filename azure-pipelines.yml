@@ -67,7 +67,7 @@ jobs:
       - script: |
           wget https://dotnet.microsoft.com/download/thank-you/net472-developer-pack -O net472.exe
           chmod +x net472.exe
-          ./net472.exe
+          net472.exe
         displayName: "Install Net framework 4.7.2"
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
