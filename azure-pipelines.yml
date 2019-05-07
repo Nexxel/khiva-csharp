@@ -166,10 +166,16 @@ jobs:
         inputs:
           targetType: 'inline'
           script: 'echo $Env:PATH;'
-      - script: |
-          $Env:PATH += "C:\Program Files\Khiva\v0"
-          dotnet vstest **/*Tests*.dll --codeCoverageEnabled true --platform x64 --configuration Debug
+      - task: VSTest@2
+        inputs:
+          testSelector: 'testAssemblies'
+          testAssemblyVer2: '**/*Tests*.dll'
+          codeCoverageEnabled: true
+          platform: 'x64'
+          configuration: 'Debug'
         displayName: "Run tests"
+        env:
+          PATH: ($env:PATH + "C:\Program Files\Khiva\v0")
       - script: codecov -f coverage.xml -t $(codecov_t)
         condition: succeeded()
         displayName: "Codecov" 
