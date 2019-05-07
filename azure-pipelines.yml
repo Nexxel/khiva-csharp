@@ -135,7 +135,7 @@ jobs:
             cmake --build . --config Release -- /m ;
           };
           $Env:PATH += "C:\Program Files\Khiva\v0";
-          Send-SettingChange();'
+          Send-SettingChange;'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
         displayName: "Install khiva"
