@@ -140,18 +140,10 @@ jobs:
           GENERATOR: "Visual Studio 15 2017 Win64"
         displayName: "Install khiva"
       - script: |
+          ls .
           cd khiva-csharp
           choco install Codecov
         displayName: "Install codecov"
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: '3.7'
-          architecture: 'x64'
-        displayName: "Use Python 3.7"
-      - task: NuGetToolInstaller@0
-        displayName: 'Use NuGet 4.7.2'
-        inputs:
-          versionSpec: '4.7.2'
       - task: NuGetCommand@2
         inputs:
           command: 'restore'
