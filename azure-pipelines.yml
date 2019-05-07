@@ -178,7 +178,10 @@ jobs:
           maximumCpuCount: true
           msbuildArchitecture: 'x64'
         displayName: "Build solution Khiva.sln"
-      - script: echo $PATH
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: 'echo $Env:PATH;'
       - task: VSTest@2
         inputs:
           testSelector: 'testAssemblies'
