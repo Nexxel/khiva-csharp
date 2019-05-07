@@ -95,12 +95,10 @@ jobs:
           versionSpec: '3.7'
           architecture: 'x64'
         displayName: "Use Python 3.7"
-      - task: PythonScript@0
-        inputs:
-          scriptSource: 'inline'
-          script: 'import * as path from ''path'';
-import * as toolLib from ''azure-pipelines-tool-lib/tool'';
-toolLib.prependPath("C:\Program Files\Khiva\v0");'
+      - script: |
+          npm install -g ts-node
+          npm install -g typescript
+          ts-node .CI/azure-pipelines/prependKhiva.ts
         displayName: "Actualize Path with khiva"
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
