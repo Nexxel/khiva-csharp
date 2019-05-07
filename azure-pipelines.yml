@@ -55,20 +55,14 @@ jobs:
           versionSpec: '3.7'
           architecture: 'x64'
         displayName: "Use Python 3.7"
-      - task: NuGetToolInstaller@0
-        displayName: 'Use NuGet 4.7.2'
-        inputs:
-          versionSpec: '4.7.2'
-      - task: DotNetCoreInstaller@0
-        inputs:
-          packageType: 'sdk'
-          version: '3.0.100-preview3-010431' 
-        displayName: Install .NET Core 3
       - script: |
-          wget https://dotnet.microsoft.com/download/thank-you/net472-developer-pack -O net472.exe
-          sudo chmod +x net472.exe
-          net472.exe
-        displayName: "Install Net framework 4.7.2"
+          apt-get install -y gnupg ca-certificates
+          apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+          echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | tee /etc/apt/sources.list.d/mono-official-stable.list
+          apt-get update 
+          apt-get install -y mono-complete
+          apt-get install -y nuget
+        displayName: "Install Mono and Nuget"
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
