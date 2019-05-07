@@ -136,10 +136,7 @@ jobs:
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
         displayName: "Install khiva"
-      - script: |
-          ls .
-          cd khiva-csharp
-          choco install Codecov
+      - script: choco install Codecov
         displayName: "Install codecov"
       - task: NuGetCommand@2
         inputs:
