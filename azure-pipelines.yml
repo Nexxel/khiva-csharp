@@ -93,6 +93,7 @@ jobs:
       - task: PowerShell@2
         inputs:
           filePath: '.CI/azure-pipelines/ActualizeEnv.ps1'
+        displayName: "Added ps1 file"
       - task: UsePythonVersion@0
         inputs:
           versionSpec: '3.7'
