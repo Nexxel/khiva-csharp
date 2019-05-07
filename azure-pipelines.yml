@@ -130,7 +130,7 @@ jobs:
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
           };
-          Write-Host "$("##vso[task.setvariable variable=Env:PATH]") $($Env:PATH + "C:\Program Files\Khiva\v0")";
+          [Environment]::SetEnvironmentVariable("PATH", "$(Env:PATH)C:\Program Files\Khiva\v0", "User");
           echo $Env:PATH;'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
@@ -174,8 +174,6 @@ jobs:
           platform: 'x64'
           configuration: 'Debug'
         displayName: "Run tests"
-        env:
-          PATH: ($env:PATH + "C:\Program Files\Khiva\v0")
       - script: codecov -f coverage.xml -t $(codecov_t)
         condition: succeeded()
         displayName: "Codecov" 
