@@ -173,7 +173,7 @@ jobs:
           maximumCpuCount: true
           msbuildArchitecture: 'x64'
         displayName: "Build solution Khiva.sln"
-      - script: echo $(Env:PATH);
+      - script: echo $(Env:PATH)
       - task: VSTest@2
         inputs:
           testSelector: 'testAssemblies'
