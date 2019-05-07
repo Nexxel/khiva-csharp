@@ -56,13 +56,9 @@ jobs:
           architecture: 'x64'
         displayName: "Use Python 3.7"
       - script: |
-          apt-get install -y gnupg ca-certificates
-          apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-          echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | tee /etc/apt/sources.list.d/mono-official-stable.list
-          apt-get update 
-          apt-get install -y mono-complete
-          apt-get install -y nuget
-        displayName: "Install Mono and Nuget"
+          wget https://download.mono-project.com/archive/5.20.1/macos-10-universal/MonoFramework-MDK-5.20.1.19.macos10.xamarin.universal.pkg -O mono.pkg
+          sudo installer -pkg mono.pkg
+        displayName: "Install Mono"
       - task: NuGetCommand@2
         displayName: "Nuget restore Khiva.sln"
         inputs:
