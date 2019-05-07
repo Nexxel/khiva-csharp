@@ -95,10 +95,14 @@ jobs:
           versionSpec: '3.7'
           architecture: 'x64'
         displayName: "Use Python 3.7"
+      - task: UseNode@1
+        inputs:
+          checkLatest: true
+        displayName: "Use Node.js"
       - script: |
-          npm install -g ts-node
           npm install -g typescript
-          ts-node .CI/azure-pipelines/prependKhiva.ts
+          tsc .CI/azure-pipelines/prependKhiva.ts
+          node .CI/azure-pipelines/prependKhiva.js
         displayName: "Actualize Path with khiva"
       - task: NuGetToolInstaller@0
         displayName: 'Use NuGet 4.7.2'
