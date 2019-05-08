@@ -101,6 +101,7 @@ jobs:
         displayName: "Use Node.js"
       - script: |
           npm install -g typescript
+          echo "Hola"
           tsc .CI/azure-pipelines/prependKhiva.ts
           ls .
           echo ".CI/azure-pipelines"
