@@ -95,17 +95,6 @@ jobs:
           versionSpec: '3.7'
           architecture: 'x64'
         displayName: "Use Python 3.7"
-      - task: UseNode@1
-        inputs:
-          version: '10.15.3'
-        displayName: "Use Node.js"
-      - script: 
-          npm install -g typescript --save && npm install -g @types/node --save &&\
-          git clone https://github.com/microsoft/azure-pipelines-tool-lib.git && cd azure-pipelines-tool-lib &&\
-          npm install && npm run build && cd .. && tsc .CI/azure-pipelines/prependKhiva.ts &&\
-          echo ".CI/azure-pipelines" && ls .CI/azure-pipelines && node .CI/azure-pipelines/prependKhiva.js &&\
-          echo $PATH
-        displayName: "Actualize Khiva PATH"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
@@ -169,13 +158,11 @@ jobs:
         inputs:
           targetType: 'inline'
           script: 'echo $Env:PATH;'
-      - task: VSTest@2
-        inputs:
-          testSelector: 'testAssemblies'
-          testAssemblyVer2: '**/*Tests*.dll'
-          codeCoverageEnabled: true
-          platform: 'x64'
-          configuration: 'Debug'
+      - script:
+          $Env:PATH += "C:\Program Files\Khiva\v0"
+          echo $Env:PATH
+          .\packages\OpenCover.4.6.519\tools\OpenCover.Console -register:user -target:".\packages\NUnit.ConsoleRunner.3.9.0\tools\nunit3-console.exe" -targetargs:"test/bin/x64/Debug/Khiva.Tests.dll --inprocess" -output:"coverage.xml" -filter:"+[Khiva*]* -[Khiva.Tests]*"
+          codecov -f coverage.xml
         displayName: "Run tests"
       - script: codecov -f coverage.xml -t $(codecov_t)
         condition: succeeded()
