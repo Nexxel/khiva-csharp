@@ -102,6 +102,9 @@ jobs:
       - script: |
           npm install -g typescript
           tsc .CI/azure-pipelines/prependKhiva.ts
+          ls .
+          echo ".CI/azure-pipelines"
+          ls .CI/azure-pipelines
           node .CI/azure-pipelines/prependKhiva.js
           echo $PATH
         displayName: "Actualize Path with khiva"
