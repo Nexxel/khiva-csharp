@@ -99,8 +99,9 @@ jobs:
         inputs:
           checkLatest: true
         displayName: "Use Node.js"
+      - script: npm install -g typescript
+        displayName: "Install typescript"
       - script: |
-          npm install -g typescript
           echo "Hola"
           tsc .CI/azure-pipelines/prependKhiva.ts
           ls .
@@ -108,7 +109,7 @@ jobs:
           ls .CI/azure-pipelines
           node .CI/azure-pipelines/prependKhiva.js
           echo $PATH
-        displayName: "Actualize Path with khiva"
+        displayName: "Actualize Khiva PATH"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
