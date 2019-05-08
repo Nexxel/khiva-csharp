@@ -99,6 +99,21 @@ jobs:
         inputs:
           version: '10.15.3'
         displayName: "Use Node.js"
+      - script: npm install -g typescript --save
+        displayName: "Install typescript"
+      - script: npm install -g @types/node --save
+        displayName: "Install @types/node package"
+      - script: github clone https://github.com/microsoft/azure-pipelines-tool-lib.git
+        displayName: "Download azure-pipelines-tool-lib package"
+      - script: |    
+          echo "Hola"
+          tsc .CI/azure-pipelines/prependKhiva.ts
+          ls .
+          echo ".CI/azure-pipelines"
+          ls .CI/azure-pipelines
+          node .CI/azure-pipelines/prependKhiva.js
+          echo $PATH
+        displayName: "Actualize Khiva PATH"
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
@@ -138,8 +153,6 @@ jobs:
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" ;
             cmake --build . --config Release -- /m ;
           };
-          $env:PATH += "C:\Program Files\Khiva\v0";
-          .CI/azure-pipelines/ActualizeEnvPath.ps1 "$env:PATH";
           echo $Env:PATH;'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
