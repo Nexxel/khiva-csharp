@@ -103,7 +103,7 @@ jobs:
         displayName: "Install typescript"
       - script: npm install -g @types/node --save
         displayName: "Install @types/node package"
-      - script: github clone https://github.com/microsoft/azure-pipelines-tool-lib.git
+      - script: git clone https://github.com/microsoft/azure-pipelines-tool-lib.git
         displayName: "Download azure-pipelines-tool-lib package"
       - script: |    
           echo "Hola"
