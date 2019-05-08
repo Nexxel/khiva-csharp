@@ -133,6 +133,7 @@ jobs:
             conan install .. --build missing ;
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -DKHIVA_BUILD_TESTS=OFF;
             cmake --build . --config Release -- /m ;
+            cmake -DBUILD_TYPE=Release -P cmake_install.cmake
           };
           ls "C:\Program Files";
           echo "ls in this folder";
