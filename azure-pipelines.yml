@@ -134,7 +134,9 @@ jobs:
             cmake .. -DCMAKE_TOOLCHAIN_FILE=c:/vcpkg/scripts/buildsystems/vcpkg.cmake -G"$env:GENERATOR" -DKHIVA_BUILD_DOCUMENTATION=OFF -DKHIVA_BUILD_BENCHMARKS=OFF -DKHIVA_ONLY_CPU_BACKEND=ON -DKHIVA_BUILD_TESTS=OFF;
             cmake --build . --config Release -- /m ;
           };
-          ls "C:\Program Files";'
+          ls "C:\Program Files";
+          echo "ls in this folder";
+          ls .'
         env: 
           GENERATOR: "Visual Studio 15 2017 Win64"
         displayName: "Install khiva"
