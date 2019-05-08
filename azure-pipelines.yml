@@ -103,8 +103,12 @@ jobs:
         displayName: "Install typescript"
       - script: npm install -g @types/node --save
         displayName: "Install @types/node package"
-      - script: git clone https://github.com/microsoft/azure-pipelines-tool-lib.git
-        displayName: "Download azure-pipelines-tool-lib package"
+      - script: |
+          git clone https://github.com/microsoft/azure-pipelines-tool-lib.git
+          cd azure-pipelines-tool-lib
+          npm install
+          npm run build
+        displayName: "Download and install azure-pipelines-tool-lib package"
       - script: |    
           echo "Hola"
           tsc .CI/azure-pipelines/prependKhiva.ts
