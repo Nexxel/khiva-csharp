@@ -11,7 +11,7 @@ if [[ "$AGENT_OS" == "Darwin" ]]; then
         mkdir installers
         touch installers/arrayfire-no-gl.pkg
         wget https://github.com/shapelets/arrayfire/releases/download/v3.6.2/arrayfire-no-gl.pkg -O installers/arrayfire-no-gl.pkg
-    fi
+fi
     # Installs arrayfire
     sudo installer -pkg ./installers/arrayfire-no-gl.pkg -target /
     echo 'export PATH=$PATH' >> ~/.bash_profile
