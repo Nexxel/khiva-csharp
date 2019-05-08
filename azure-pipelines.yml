@@ -157,7 +157,7 @@ jobs:
           msbuildArchitecture: 'x64'
         displayName: "Build solution Khiva.sln"
       - powershell: |
-          $Env:PATH += "C:\Program Files\Khiva\v0\lib"
+          $Env:PATH += "C:\Program Files\Khiva\v0\lib;"
           echo $Env:PATH
           .\packages\OpenCover.4.6.519\tools\OpenCover.Console -register:user -target:".\packages\NUnit.ConsoleRunner.3.9.0\tools\nunit3-console.exe" -targetargs:"test/bin/x64/Debug/Khiva.Tests.dll --inprocess" -output:"coverage.xml" -filter:"+[Khiva*]* -[Khiva.Tests]*"
           codecov -f coverage.xml
