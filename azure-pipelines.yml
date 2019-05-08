@@ -99,7 +99,7 @@ jobs:
         inputs:
           version: '10.15.3'
         displayName: "Use Node.js"
-      - script: |    
+      - script: 
           npm install -g typescript --save && npm install -g @types/node --save &&\
           git clone https://github.com/microsoft/azure-pipelines-tool-lib.git && cd azure-pipelines-tool-lib &&\
           npm install && npm run build && cd .. && tsc .CI/azure-pipelines/prependKhiva.ts &&\
