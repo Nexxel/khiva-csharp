@@ -99,23 +99,11 @@ jobs:
         inputs:
           version: '10.15.3'
         displayName: "Use Node.js"
-      - script: npm install -g typescript --save
-        displayName: "Install typescript"
-      - script: npm install -g @types/node --save
-        displayName: "Install @types/node package"
-      - script: |
-          git clone https://github.com/microsoft/azure-pipelines-tool-lib.git
-          cd azure-pipelines-tool-lib
-          npm install
-          npm run build
-        displayName: "Download and install azure-pipelines-tool-lib package"
       - script: |    
-          echo "Hola"
-          tsc .CI/azure-pipelines/prependKhiva.ts
-          ls .
-          echo ".CI/azure-pipelines"
-          ls .CI/azure-pipelines
-          node .CI/azure-pipelines/prependKhiva.js
+          npm install -g typescript --save && npm install -g @types/node --save &&\
+          git clone https://github.com/microsoft/azure-pipelines-tool-lib.git && cd azure-pipelines-tool-lib &&\
+          npm install && npm run build && cd .. && tsc .CI/azure-pipelines/prependKhiva.ts &&\
+          echo ".CI/azure-pipelines" && ls .CI/azure-pipelines && node .CI/azure-pipelines/prependKhiva.js &&\
           echo $PATH
         displayName: "Actualize Khiva PATH"
       - task: PowerShell@2
