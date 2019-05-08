@@ -99,11 +99,11 @@ jobs:
         inputs:
           version: '10.15.3'
         displayName: "Use Node.js"
-      - script: npm install -D typescript
+      - script: npm install typescript --save
         displayName: "Install typescript"
       - script: |
-          npm install -D path
-          npm install -D azure-pipelines-tool-lib/tool
+          npm install path --save
+          npm install azure-pipelines-tool-lib/tool --save
           echo "Hola"
           tsc .CI/azure-pipelines/prependKhiva.ts
           ls .
