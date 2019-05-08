@@ -103,8 +103,8 @@ jobs:
         displayName: "Install typescript"
       - script: npm install -g path --save
         displayName: "Install path package"
-      - script: npm install -g azure-pipelines-tool-lib/tool --save
-        displayName: "Install azure-pipelines-tool-lib/tool package"
+      - script: npm install -g azure-pipelines-tool-lib --save
+        displayName: "Install azure-pipelines-tool-lib package"
       - script: |    
           echo "Hola"
           tsc .CI/azure-pipelines/prependKhiva.ts
